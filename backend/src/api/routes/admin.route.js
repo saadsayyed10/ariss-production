@@ -3,9 +3,6 @@ import { Router } from "express";
 
 const adminRouter = Router();
 
-adminRouter.post(
-  "/users/panel/register",
-  panelUserController.registerPanelUserController,
-);
+adminRouter.post("/register", panelUserController.registerPanelUserController);
 
 export default adminRouter;
