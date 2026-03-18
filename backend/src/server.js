@@ -8,6 +8,10 @@ const PORT = ENV.PORT;
 app.use(express.json());
 app.use(cors());
 
+app.get("/health", (_req, res) => {
+  res.send("<p><b>Web services are working properly: 200</b></p>");
+});
+
 app.listen(PORT, () => {
   console.log(`Server up and running on PORT: ${PORT}`);
 });
