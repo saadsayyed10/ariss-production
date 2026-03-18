@@ -33,6 +33,8 @@ export const registerPanelUserService = async (
 };
 
 // Login Panel User Account
+export const loginPanelUserService = async (email, password) => {};
+
 // Approve Moderator
 // Diapprove Moderator
 // Edit Panel User Account
