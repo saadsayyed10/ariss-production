@@ -48,7 +48,24 @@ export const loginPanelUserService = async (email, password) => {
   return { token, panelUser };
 };
 
+// Fetch profile
+export const fetchPanelUserProfile = async (panelUserId) => {
+  return await prisma.panel_users.findUnique({
+    where: {
+      id: panelUserId,
+    },
+    select: {
+      first_name: true,
+      last_name: true,
+      email: true,
+      approval_status: true,
+      created_at: true,
+      updated_at: true,
+    },
+  });
+};
+
+// Fetch all accounts
 // Approve Moderator
 // Diapprove Moderator
-// Edit Panel User Account
 // Delete Panel User Account
