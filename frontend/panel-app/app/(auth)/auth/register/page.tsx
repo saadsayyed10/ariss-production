@@ -20,12 +20,19 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [userType, setUserType] = useState<string | null>("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async () => {
     setIsLoading(true);
+
+    if (password !== confirmPassword) {
+      alert("Password did not match");
+      return;
+    }
+
     try {
       await registerPanelUserAPI(
         firstName,
@@ -75,6 +82,11 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+          />
+          <Input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
           />
           <Select
             value={userType}

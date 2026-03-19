@@ -16,3 +16,7 @@ export const registerPanelUserAPI = async (
     userType,
   });
 };
+
+export const loginPanelUserAPI = async (email: string, password: string) => {
+  return axios.post(`${API_URL}/panel/users/login`, { email, password });
+};
