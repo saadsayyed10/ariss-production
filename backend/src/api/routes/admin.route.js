@@ -10,7 +10,7 @@ adminRouter.post("/login", panelUserController.loginPanelUserController);
 adminRouter.get(
   "/profile",
   protectPanelRoute,
-  panelUserController.loginPanelUserController,
+  panelUserController.fetchPanelUserProfileController,
 );
 
 export default adminRouter;
