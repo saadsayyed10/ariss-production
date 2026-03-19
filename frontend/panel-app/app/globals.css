@@ -2,6 +2,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@theme {
+  --font-lato: "Lato", sans-serif;
+}
+
+@font-face {
+  font-family: "Lato", sans-serif;
+  src: url("/fonts/Lato-Regular.ttf") format("ttf");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
