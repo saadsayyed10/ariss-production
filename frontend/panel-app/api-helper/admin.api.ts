@@ -20,3 +20,11 @@ export const registerPanelUserAPI = async (
 export const loginPanelUserAPI = async (email: string, password: string) => {
   return axios.post(`${API_URL}/panel/users/login`, { email, password });
 };
+
+export const fetchPanelUserProfileAPI = async (token: string) => {
+  return axios.get(`${API_URL}/panel/users/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
