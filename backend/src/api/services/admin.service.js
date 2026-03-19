@@ -33,7 +33,20 @@ export const registerPanelUserService = async (
 };
 
 // Login Panel User Account
-export const loginPanelUserService = async (email, password) => {};
+export const loginPanelUserService = async (email, password) => {
+  const panelUser = await prisma.panel_users.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  const isValidPassword = await bcryptjs.compare(password, panelUser.password);
+  if (!isValidPassword) throw new Error("Password is incorrect");
+
+  const token = generateTokenForPanel(panelUser.id);
+
+  return { token, panelUser };
+};
 
 // Approve Moderator
 // Diapprove Moderator
