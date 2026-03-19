@@ -48,3 +48,20 @@ export const loginPanelUserController = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+export const fetchPanelUserProfileController = async (req, res) => {
+  try {
+    if (!req.panelUser) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized: Token not provided" });
+    }
+
+    const panelUser = await panelUserServices.fetchPanelUserProfileService(
+      req.panelUser.id,
+    );
+    res.status(200).json({ panelUser });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};

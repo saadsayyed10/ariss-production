@@ -49,7 +49,7 @@ export const loginPanelUserService = async (email, password) => {
 };
 
 // Fetch profile
-export const fetchPanelUserProfile = async (panelUserId) => {
+export const fetchPanelUserProfileService = async (panelUserId) => {
   return await prisma.panel_users.findUnique({
     where: {
       id: panelUserId,
