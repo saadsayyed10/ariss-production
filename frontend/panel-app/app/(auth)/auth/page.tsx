@@ -4,36 +4,44 @@ import { loginPanelUserAPI } from "@/api-helper/admin.api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { userAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Login = () => {
+  const { hydrate, setAuth } = userAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleLogin = async () => {
     setIsLoading(true);
     try {
-      await loginPanelUserAPI(email, password);
+      const res = await loginPanelUserAPI(email, password);
+      console.log(res.data);
+      const { token, panelUser } = res.data;
+
+      setAuth(token, panelUser);
 
       setEmail("");
       setPassword("");
+
+      router.replace("/");
     } catch (error: any) {
       console.error(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    hydrate();
+  }, []);
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen lg:p-0 p-4">
